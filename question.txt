@@ -1,0 +1,24 @@
+1. The datastructure I have used to store the images is a Quadtree
+Quadtree is generally used when storing images (binary images)
+Quadtree works on the divide and conquer strategy, where each part of the image is divided into 4 boxes
+If the box contains both black and white pixels in it, then it is further divided
+If not the box is given the pure color it contains
+This saving technique will lead to a lot of compression while storing the images
+Another advantage of using a Quadtree is that finding overlap between two Quadtrees is very fast as we do not need to look below the pure nodes while finding the overlap
+After generating 1000*1000 images, it was observed that they are about 1-1.2Mb in size
+Creating a quad tree and serializing and saving the tree to a text file results in a size of around 20Kb - 40Kb
+Worst case in terms of storage complexity would be when alternate cells are black which forms no pure box and all the box are extended to the very root
+Worst case requires all boxes to be stored O(size * size) -> worst case space complexity
+Worst case time complexity is to go through all boxes while storing O(size * sisze)
+
+2. I have created a file test_case_generator.py
+This generates a normal microscope clicked image and a dye sensor image
+
+
+3. main.py is the entrypoint and exitpoint of the entire program
+It displays if a parasite has cancer or not
+
+4. Improving upon the run time execution
+Rather than calculatin number of black pixels in the Quad subtree we can somehow cache the results (Getting this idea from converting Divide and Conquer into kind of Dynamic Programming problem, where the results are cached and reused)
+Storing the black pixel count for each box while deserializing the serialized string
+This change reduces the runtime from 2*10^-6 to 10^-8
